@@ -4,7 +4,7 @@ import { spawnSync } from 'child_process';
 
 let path: string;
 
-switch (process.platform) {
+switch (process.env.HANDBRAKE_ENV || process.platform) {
     case 'darwin':
         path = join(__dirname, '..', 'bin', 'HandbrakeCLI')
         break
@@ -20,5 +20,5 @@ export default path
 export { path }
 export const HandbrakeCLIPath = path
 export function install() {
-    return new Installer().setup(process.platform);
+    return new Installer().setup(process.env.HANDBRAKE_ENV || process.platform);
 }
